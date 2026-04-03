@@ -2,8 +2,10 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from .models import User
-from .serializers import UserSerializer
+from .serializers import UserSerializer,LoginSerializer
 from .permissions import IsAdmin
+from django.contrib.auth import authenticate
+from django.contrib.auth import login
 # Create your views here.
 
 # CREATE USER
@@ -51,3 +53,15 @@ def delete_user(request, id):
         return Response(serializer.data)
     user.delete()
     return Response({'message': 'User deleted'})
+
+@api_view(['POST'])
+def Login(request):
+    serializer = LoginSerializer(data=request.data)
+    if serializer.is_valid():
+        user = authenticate(username=serializer.validated_data['username'], password=serializer.validated_data['password'])
+        if user and user.is_active:
+            login(request, user)
+            return Response({"message": "Login successful"},status=200)
+        else:
+            return Response({"error": "Invalid credentials or inactive account"}, status=400)
+    return Response(serializer.errors, status=400)
