@@ -11,7 +11,7 @@ It allows users to manage financial records (income/expenses) with role-based ac
 1. Clone the repository
 
 ```bash
-git clone <your-repo-link>
+git clone <https://github.com/vishwasferwani/Finance-API>
 cd finance_project
 ```
 
