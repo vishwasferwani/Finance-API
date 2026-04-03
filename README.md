@@ -6,7 +6,6 @@ It allows users to manage financial records (income/expenses) with role-based ac
 
 
 
-
 ## Setup Process
 
 1. Clone the repository
@@ -45,12 +44,15 @@ python manage.py runserver
 ### Authentication
 -  Session-based authentication is used
 
-- Login via /admin/login/
-## API Explanation
-### Authentication
--  Session-based authentication is used
+- Login via /login/
 
-- Login via /admin/login/
+```bash
+Json Format
+{
+  "username": "analyst1",
+  "password": "12345"
+}
+```
 ## User APIs
 
 | Method | Endpoint                  | Description              |
